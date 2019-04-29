@@ -1,4 +1,6 @@
-# Overview
+# cmake-font-awesome-download
+
+[![Build Status](https://travis-ci.com/tt4g/cmake-font-awesome-download.svg?branch=master)](https://travis-ci.com/tt4g/cmake-font-awesome-download)
 
 Download Font Awesome from GitHub release.
 
