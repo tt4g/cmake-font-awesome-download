@@ -45,7 +45,6 @@ Example
 
     add_custom_target(CopyFontAwesome
       COMMAND "${CMAKE_COMMAND}" -E copy_directory "${FontAwesome5_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/fontawesome"
-      DEPENDS FontAwesome5Download
       WORKING_DIRECTORY "${FontAwesome5_SOURCE_DIR}"
       COMMENT "Copy Font-Awesome resources"
       VERBATIM
@@ -150,7 +149,6 @@ Example
       COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_BINARY_DIR}/fontawesome/svgs"
       COMMAND "${CMAKE_COMMAND}" -E copy "${FontAwesome5_SOURCE_DIR}/LICENSE.txt" "${CMAKE_BINARY_DIR}/fontawesome"
       COMMAND "${CMAKE_COMMAND}" -E copy "${FontAwesome5_SOURCE_DIR}/svgs/brands/500px.svg" "${CMAKE_BINARY_DIR}/fontawesome/svgs"
-      DEPENDS FontAwesome5Download
       WORKING_DIRECTORY "${FontAwesome5_SOURCE_DIR}"
       COMMENT "Copy Font-Awesome resources"
       VERBATIM
