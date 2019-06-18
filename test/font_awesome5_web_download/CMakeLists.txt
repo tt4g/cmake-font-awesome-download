@@ -20,7 +20,6 @@ font_awesome5_web_download(
 
 add_custom_target(CopyFontAwesome5Web ALL
   COMMAND "${CMAKE_COMMAND}" -E copy_directory "${FontAwesome5_WEB_SOURCE_DIR}" "${DEST_DIR}"
-  DEPENDS FontAwesome5WebDownload
   WORKING_DIRECTORY "${FontAwesome5_WEB_SOURCE_DIR}"
   COMMENT "Copy Font-Awesome resources"
   VERBATIM

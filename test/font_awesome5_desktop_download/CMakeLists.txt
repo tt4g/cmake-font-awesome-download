@@ -22,7 +22,6 @@ add_custom_target(CopyFontAwesome5Desktop ALL
   COMMAND "${CMAKE_COMMAND}" -E make_directory "${DEST_DIR}/svgs"
   COMMAND "${CMAKE_COMMAND}" -E copy "${FontAwesome5_DESKTOP_SOURCE_DIR}/LICENSE.txt" "${DEST_DIR}"
   COMMAND "${CMAKE_COMMAND}" -E copy "${FontAwesome5_DESKTOP_SOURCE_DIR}/svgs/brands/500px.svg" "${DEST_DIR}/svgs"
-  DEPENDS FontAwesome5DesktopDownload
   WORKING_DIRECTORY "${FontAwesome5_DESKTOP_SOURCE_DIR}"
   COMMENT "Copy Font-Awesome resources"
   VERBATIM
