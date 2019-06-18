@@ -27,6 +27,9 @@ include(FetchContent)
 ``DOWNLOAD_SHA256 <sha256sum>``
   Hash of the ``fontawesome-free-<version>-web.zip``.
 
+``OUTPUT_DIR <output-dir>``
+  Destination directory path of extracted Font Awesome.
+
 ``OUTPUT_SOURCE_DIR <out-var>``
   Store directory path of extracted Font Awesome source.
 
@@ -56,6 +59,7 @@ function(font_awesome5_web_download target_name)
   set(oneValueArgs
     DOWNLOAD_VERSION
     DOWNLOAD_SHA256
+    OUTPUT_DIR
     OUTPUT_SOURCE_DIR)
 
   set(multiValueArgs)
@@ -86,7 +90,8 @@ function(font_awesome5_web_download target_name)
   FetchContent_Declare("${target_name}"
     PREFIX "${target_name}"
     URL "${FontAwesome5_DOWNLOAD_URL_}"
-    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256})
+    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256}
+    SOURCE_DIR "${FontAwesome5DownloadArgs_OUTPUT_DIR}")
 
   FetchContent_GetProperties("${target_name}"
     POPULATED font_awesome5_web_download_POPULATED)
@@ -125,6 +130,9 @@ endfunction()
 ``DOWNLOAD_SHA256 <sha256sum>``
   Hash of the ``fontawesome-free-<version>-desktop.zip``.
 
+``OUTPUT_DIR <output-dir>``
+  Destination directory path of extracted Font Awesome.
+
 ``OUTPUT_SOURCE_DIR <out-var>``
   Store directory path of extracted Font Awesome source.
 
@@ -156,6 +164,7 @@ function(font_awesome5_desktop_download target_name)
   set(oneValueArgs
     DOWNLOAD_VERSION
     DOWNLOAD_SHA256
+    OUTPUT_DIR
     OUTPUT_SOURCE_DIR)
 
   set(multiValueArgs)
@@ -186,7 +195,8 @@ function(font_awesome5_desktop_download target_name)
   FetchContent_Declare("${target_name}"
     PREFIX "${target_name}"
     URL "${FontAwesome5_DOWNLOAD_URL_}"
-    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256})
+    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256}
+    SOURCE_DIR "${FontAwesome5DownloadArgs_OUTPUT_DIR}")
 
   FetchContent_GetProperties("${target_name}"
     POPULATED font_awesome5_desktop_download_POPULATED)
