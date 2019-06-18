@@ -3,9 +3,9 @@
 # --------------------
 #]========================================]
 
-cmake_minimum_required(VERSION 3.4.0)
+cmake_minimum_required(VERSION 3.11.0)
 
-include(ExternalProject)
+include(FetchContent)
 
 #[========================================[.rst:
 .. command:: font_awesome5_web_download
@@ -19,7 +19,7 @@ include(ExternalProject)
     )
 
 ``<target_name>``
-  Target name for `ExternalProject_Add` used internal.
+  Target name for `FetchContent_Declare` and `FetchContent_Populate` used internal.
 
 ``DOWNLOAD_VERSION <version>``
   Font Awesome version.
@@ -51,25 +51,21 @@ Example
 
 #]========================================]
 function(font_awesome5_web_download target_name)
-  set(options
-  )
+  set(options)
 
   set(oneValueArgs
     DOWNLOAD_VERSION
     DOWNLOAD_SHA256
-    OUTPUT_SOURCE_DIR
-  )
+    OUTPUT_SOURCE_DIR)
 
-  set(multiValueArgs
-  )
+  set(multiValueArgs)
 
   cmake_parse_arguments(
     FontAwesome5DownloadArgs
     "${options}"
     "${oneValueArgs}"
     "${multiValueArgs}"
-    ${ARGN}
-  )
+    ${ARGN})
 
   if(NOT DEFINED FontAwesome5DownloadArgs_DOWNLOAD_VERSION)
     message(FATAL_ERROR "DOWNLOAD_VERSION not defined")
@@ -87,19 +83,24 @@ function(font_awesome5_web_download target_name)
   set(FontAwesome5_DOWNLOAD_URL_
     "https://github.com/FortAwesome/Font-Awesome/releases/download/${FontAwesome5DownloadArgs_DOWNLOAD_VERSION}/fontawesome-free-${FontAwesome5DownloadArgs_DOWNLOAD_VERSION}-web.zip")
 
-  ExternalProject_Add(
-    "${target_name}"
+  FetchContent_Declare("${target_name}"
     PREFIX "${target_name}"
     URL "${FontAwesome5_DOWNLOAD_URL_}"
-    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256}
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-  )
+    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256})
+
+  FetchContent_GetProperties("${target_name}"
+    POPULATED font_awesome5_web_download_POPULATED)
+
+  if(NOT font_awesome5_web_download_POPULATED)
+    FetchContent_Populate("${target_name}")
+  endif()
 
   if(DEFINED FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR)
-    ExternalProject_Get_property("${target_name}" SOURCE_DIR)
-    set(${FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR} "${SOURCE_DIR}" PARENT_SCOPE)
+    FetchContent_GetProperties("${target_name}"
+      SOURCE_DIR font_awesome5_web_download_SOURCE_DIR)
+
+    set(${FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR}
+      "${font_awesome5_web_download_SOURCE_DIR}" PARENT_SCOPE)
   endif()
 endfunction()
 
@@ -116,7 +117,7 @@ endfunction()
     )
 
 ``<target_name>``
-  Target name for `ExternalProject_Add` used internal.
+  Target name for `FetchContent_Declare` and `FetchContent_Populate` used internal.
 
 ``DOWNLOAD_VERSION <version>``
   Font Awesome version.
@@ -150,25 +151,21 @@ Example
 
 #]========================================]
 function(font_awesome5_desktop_download target_name)
-  set(options
-  )
+  set(options)
 
   set(oneValueArgs
     DOWNLOAD_VERSION
     DOWNLOAD_SHA256
-    OUTPUT_SOURCE_DIR
-  )
+    OUTPUT_SOURCE_DIR)
 
-  set(multiValueArgs
-  )
+  set(multiValueArgs)
 
   cmake_parse_arguments(
     FontAwesome5DownloadArgs
     "${options}"
     "${oneValueArgs}"
     "${multiValueArgs}"
-    ${ARGN}
-  )
+    ${ARGN})
 
   if(NOT DEFINED FontAwesome5DownloadArgs_DOWNLOAD_VERSION)
     message(FATAL_ERROR "DOWNLOAD_VERSION not defined")
@@ -186,18 +183,23 @@ function(font_awesome5_desktop_download target_name)
   set(FontAwesome5_DOWNLOAD_URL_
     "https://github.com/FortAwesome/Font-Awesome/releases/download/${FontAwesome5DownloadArgs_DOWNLOAD_VERSION}/fontawesome-free-${FontAwesome5DownloadArgs_DOWNLOAD_VERSION}-desktop.zip")
 
-  ExternalProject_Add(
-    "${target_name}"
+  FetchContent_Declare("${target_name}"
     PREFIX "${target_name}"
     URL "${FontAwesome5_DOWNLOAD_URL_}"
-    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256}
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-  )
+    URL_HASH SHA256=${FontAwesome5DownloadArgs_DOWNLOAD_SHA256})
+
+  FetchContent_GetProperties("${target_name}"
+    POPULATED font_awesome5_desktop_download_POPULATED)
+
+  if(NOT font_awesome5_desktop_download_POPULATED)
+    FetchContent_Populate("${target_name}")
+  endif()
 
   if(DEFINED FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR)
-    ExternalProject_Get_property("${target_name}" SOURCE_DIR)
-    set(${FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR} "${SOURCE_DIR}" PARENT_SCOPE)
+    FetchContent_GetProperties("${target_name}"
+      SOURCE_DIR font_awesome5_desktop_download_SOURCE_DIR)
+
+    set(${FontAwesome5DownloadArgs_OUTPUT_SOURCE_DIR}
+      "${font_awesome5_desktop_download_SOURCE_DIR}" PARENT_SCOPE)
   endif()
 endfunction()
